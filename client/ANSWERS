@@ -1,0 +1,16 @@
+Explain what a token is used for.
+
+/* Tokens are used to store encrypted data and help keep folks whom do not have the dredentials from accessing the users data*/
+
+What steps can you take in your web apps to keep your data secure?
+
+/*https requests, requiring sign on for sensitive data*/
+
+Describe how web servers work.
+
+/*they respond to requests from the front end and send data back if it matches the end points*/
+
+
+Which HTTP methods can be mapped to the CRUD acronym that we use when interfacing with APIs/Servers.
+
+/*create = post, read = get, update = put, delete = delete*/
