@@ -1,15 +1,23 @@
 import React, { useState } from "react";
-import axios from "axios";
+import { Link } from 'react-router-dom'
+import axiosWithAuth from './axiosWithAuth'
+import AddNewColor from './AddColor'
+
 
 const initialColor = {
   color: "",
   code: { hex: "" }
 };
 
+
 const ColorList = ({ colors, updateColors }) => {
   console.log(colors);
   const [editing, setEditing] = useState(false);
   const [colorToEdit, setColorToEdit] = useState(initialColor);
+  
+  const data ={
+    ...colorToEdit
+  }
 
   const editColor = color => {
     setEditing(true);
@@ -17,14 +25,26 @@ const ColorList = ({ colors, updateColors }) => {
   };
 
   const saveEdit = e => {
+    console.log(colorToEdit.id)
     e.preventDefault();
-    // Make a put request to save your updated color
-    // think about where will you get the id from...
-    // where is is saved right now?
-  };
+    axiosWithAuth()
+    .put(`http://localhost:5000/api/colors/${colorToEdit.id}`, data)
+    .then(res =>{
+      console.log('guud', res)
+      .push('/bubblepage')
+    })
+    .catch(err => console.log(err.response))
+    window.location.href = window.location.href  
+  }
 
   const deleteColor = color => {
-    // make a delete request to delete this color
+    axiosWithAuth()
+    .delete(`http://localhost:5000/api/colors/${colorToEdit.id}`)
+    .then(res =>{
+      console.log('guud', res)
+      .push('/bubblepage')
+    })
+    .catch(err => console.log(err.response))
   };
 
   return (
@@ -46,6 +66,9 @@ const ColorList = ({ colors, updateColors }) => {
           </li>
         ))}
       </ul>
+      <Link to='/add-color'>
+      <button onClick={() =>AddNewColor}>New Color</button>
+      </Link>
       {editing && (
         <form onSubmit={saveEdit}>
           <legend>edit color</legend>
@@ -71,13 +94,13 @@ const ColorList = ({ colors, updateColors }) => {
             />
           </label>
           <div className="button-row">
-            <button type="submit">save</button>
+            <button type="submit"onClick={e => saveEdit(e, colors)}>save</button>
             <button onClick={() => setEditing(false)}>cancel</button>
+            <button onClick={e => deleteColor(e, colors)}>delete</button>
           </div>
         </form>
       )}
       <div className="spacer" />
-      {/* stretch - build another form here to add a color */}
     </div>
   );
 };
