@@ -12,8 +12,8 @@ function App() {
     <Router>
       <div className="App">
         <div className='linkholder'>
-          <Link to='/'>Login</Link>
-          <Link to='/bubblepage'>BubblePage</Link>
+          <Link to='/'className='links'>Login</Link>
+          <Link to='/bubblepage' className='links'>BubblePage</Link>
         </div>
         <Route
           exact
