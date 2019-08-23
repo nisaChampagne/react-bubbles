@@ -20,7 +20,8 @@ function AddNewColor() {
     AxiosWithAuth()
       .post("http://localhost:5000/api/colors", newColors)
       .then(res => {
-        console.log("colors", res.data);
+        console.log("colors", res.data)
+        .push('/bubblepage')
       })
       .catch(err => {
         console.log(err.response);

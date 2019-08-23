@@ -5,9 +5,9 @@ import PrivateRoute from "./components/PrivateRoute";
 import Login from "./components/Login";
 import BubblePage from "./components/BubblePage";
 import "./styles.scss";
+import AddNewColor from "./components/AddColor";
 
 function App() {
-  const [colorList, setColorList] = useState([]);
   return (
     <Router>
       <div className="App">
@@ -28,6 +28,8 @@ function App() {
           }}
         />
         <PrivateRoute exact path="/bubblepage" component={BubblePage} />
+        <PrivateRoute exact path="/add-color" component={AddNewColor} />
+
       </div>
     </Router>
   );
